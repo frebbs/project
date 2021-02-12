@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SITE NAME</title>
+</head>
+<body>
+    <%- include('../partials/_membersNav') %> 
+
+    <h1>Profile Page</h1>
+    <h2>Email: <%- user.email %> </h2>
+
+    <div class="container">
+        <h2>Add game question to database</h2>
+        <p>Fill out ALL fields below to submit your question to the database, it will be avaliable to all users of the game</p>
+
+        <form action="/members/addquestion" method="POST">
+            <label for="question">Enter your question:</label>
+            <input type="text" name="question"><br>
+            <label for="category">Question category:</label>
+            <select name="category">
+                <option value="" selected disabled>Select One</option>
+                <option value="Maths">Maths</option>
+                <option value="Science">Science</option>
+                <option value="Space">Space</option>
+                <option value="General">General Knowledge</option>
+            </select><br>
+            <label for="choiceA">Answer A:</label>
+            <input type="text" name="choiceA">
+            <label for="choiceB">Answer B:</label>
+            <input type="text" name="choiceB">
+            <label for="choiceC">Answer C:</label>
+            <input type="text" name="choiceC">
+            <label for="choiceD">Answer D:</label>
+            <input type="text" name="choiceD"><br>
+            <label for="answer">Correct Answer:</label>
+            <input type="text" name="answer"><br>
+
+            <button>Save Question</button>
+        </form>
+    </div>
+    <div class="container">
+       <h2>Your uploaded questions</h2>
+        <ul>
+            <% userQuestions.forEach(function(question) {  %> 
+                <li id="<%- question._id%>"> <%- question.question%></li>
+                    <ul>
+                        <% question.choices.forEach(function(choice) { %> 
+                        <li><%- choice %></li>
+                        <% }) %> 
+                    </ul>
+                <li>Answer: <%- question.answer %></li>
+                <hr>
+            <% }) %>
+            
+        </ul>
+    </div>
+</body>
+</html>
